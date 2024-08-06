@@ -10,6 +10,9 @@ from typing import Generator, Any
 
 
 async def async_generator() -> Generator[float, None, None]:
+    """
+    Async generator coroutine
+    """
     for i in range(10):
         yield random.uniform(0, 10)
         await asyncio.sleep(1)
