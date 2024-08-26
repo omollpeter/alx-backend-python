@@ -30,7 +30,7 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(
         self, name: str, mapping: Mapping, keys: Sequence, expected: Any
-    ) -> str:
+    ) -> None:
         """
         Tests expected results for three different inputs
         """
