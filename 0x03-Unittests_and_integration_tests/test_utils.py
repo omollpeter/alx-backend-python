@@ -36,3 +36,14 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         result = access_nested_map(mapping, keys)
         self.assertEqual(result, expected)
+
+    @parameterized.expand([
+        ("Empty dict", {}, ("a",)),
+        ("Non existent key", {"a": 1}, ("a", "b"))
+    ])
+    def test_access_nested_map_exception(
+        self, name: str, mapping: Mapping, keys: Sequence
+    ) -> None:
+        with self.assertRaises(KeyError) as context:
+            access_nested_map(mapping, keys)
+        self.assertEqual(str(context.exception).strip("'"), str(keys[-1]))
