@@ -6,6 +6,13 @@ This module contains tests for functions in utils.py
 
 import unittest
 from parameterized import parameterized
+from typing import (
+    Mapping,
+    Sequence,
+    Any,
+    Dict,
+    Callable,
+)
 
 
 access_nested_map = __import__("utils").access_nested_map
@@ -21,7 +28,9 @@ class TestAccessNestedMap(unittest.TestCase):
         ("Nested dict", {"a": {"b": 2}}, ("a",), {"b": 2}),
         ("Nested mapping", {"a": {"b": 2}}, ("a", "b"), 2)
     ])
-    def test_access_nested_map(self, name, mapping, keys, expected):
+    def test_access_nested_map(
+        self, name: str, mapping: Mapping, keys: Sequence, expected: Any
+    ) -> str:
         """
         Tests expected results for three different inputs
         """
