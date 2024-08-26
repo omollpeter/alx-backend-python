@@ -22,5 +22,8 @@ class TestAccessNestedMap(unittest.TestCase):
         ("Nested mapping", {"a": {"b": 2}}, ("a", "b"), 2)
     ])
     def test_access_nested_map(self, name, mapping, keys, expected):
+        """
+        Tests expected results for three different inputs
+        """
         result = access_nested_map(mapping, keys)
         self.assertEqual(result, expected)
