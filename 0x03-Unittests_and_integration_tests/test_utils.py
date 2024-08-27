@@ -13,9 +13,11 @@ from typing import (
     Dict,
     Callable,
 )
+from unittest.mock import Mock, patch
 
 
 access_nested_map = __import__("utils").access_nested_map
+get_json = __import__("utils").get_json
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -47,3 +49,23 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError) as context:
             access_nested_map(mapping, keys)
         self.assertEqual(str(context.exception).strip("'"), str(keys[-1]))
+
+
+class TestGetJson(unittest.TestCase):
+    """
+    Contains tests for get_json function
+    """
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    @patch('requests.get')
+    def test_get_json(self, test_url, test_payload, mock_get):
+        # Create a mock response object
+        mock_response = Mock()
+        mock_response.json.return_value = test_payload
+
+        mock_get.return_value = mock_response
+
+        result = get_json(test_url)
+        self.assertEqual(result, test_payload)
